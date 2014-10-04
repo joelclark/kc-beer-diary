@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Brew Log{% endblock %}
+{% block content %}
+{% for recipe in recipes %}
+<p><a href="/recipe/{{ recipe.slug }}">{{ recipe.name }} - {{ recipe.brew_date }}</a></p>
+{% endfor %}
+{% endblock %}

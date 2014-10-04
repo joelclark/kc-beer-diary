@@ -1,0 +1,8 @@
+body { background-image: url(/img/woodpattern.jpeg) }
+.indented-container { padding: 50px; background-color: white; }
+.footer { padding-bottom: 300px; }
+#title { margin: 50px 0px; font-weight: bold; font-size: 375%; color: black; text-decoration: none; display: block; }
+fieldset { margin-top: 50px; }
+#login-info { float: right; }
+#lock-img { width: 20px; }
+#admin-links { }

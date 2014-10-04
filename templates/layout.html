@@ -1,0 +1,65 @@
+{% macro form_group(name, title, validation_errors) -%}
+	<div class="form-group {{ 'has-error' if validation_errors[name] }}">
+	<label class="control-label" for="{{ name }}">{{ title }}</label>
+{%- endmacro %}
+{% macro error(name, validation_errors) -%}
+	{% if validation_errors[name] %}
+    	<p class="help-block">{{ validation_errors[name] }}</p>
+	{% endif %}
+{%- endmacro %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kentucky Creek Brewkitchen - {% block title %}Untitled{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="/css/app.css">
+	<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div class="container indented-container">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="login-info">
+				{% if current_user %}
+					Logged in as 
+					{% if is_admin %}
+						admin
+					{% endif %}
+					{{ current_user.email() }}.
+					<a href="/logout"><img id="lock-img" src="/img/lock.png"></a>
+				{% else %}
+					<a href="/login"><img id="lock-img" src="/img/lock.png"></a>
+				{% endif %}
+			</div>
+			<a href="/" id="title">Kentucky Creek Brewkitchen</a>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<img width="100%" src="/img/paris.png">
+	</div>
+</div>
+<div class="container indented-container">
+	<div class="row">
+		<div class="col-md-8">
+			<h2>{{ self.title() }}</h2>
+			{% block content %}This page was not intentionally left blank.{% endblock %}
+		</div>
+		<div class="col-md-4">
+			{% if is_admin %}
+				<div id="admin-links">
+					<a href="/recipes/new">New Recipe</a>
+				</div>
+			{% endif %}			
+			<h2>About Us</h2>
+			<img src="/img/us.jpg">
+			<p style="margin-top: 10px;"><i>Joel and Amanda currently hail from Charlotte, NC and spend their time brewing, cooking and causing general mayhem wherever they may be.</i></p>
+		</div>
+	</div>
+</div>
+<div class="container indented-container footer">
+</div>
+</body>
+</html>

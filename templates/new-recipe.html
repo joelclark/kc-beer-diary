@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}New Recipe{% endblock %}
+{% block content %}
+<form method="post" role="form" id="the-form">
+    <fieldset>
+
+        {{ form_group('name', 'Name', validation_errors) }}
+            <input class="form-control" type="text" name="name" value="{{ recipe.name if recipe.name }}"/>
+            {{ error('name', validation_errors)}}
+        </div>
+
+        {{ form_group('brew_date', 'Brew Date', validation_errors) }}
+            <input class="form-control" type="text" name="brew_date" value="{{ recipe.brew_date if recipe.brew_date }}"/>
+            {{ error('brew_date', validation_errors)}}
+        </div>
+
+        {{ form_group('content', 'Content', validation_errors) }}
+            {{ error('content', validation_errors)}}
+            <input id="content-field" type="hidden" name="content" value="{{ recipe.content if recipe.content }}">
+            <div id="editor" style="width: 100%; height: 300px;">{{ recipe.content if recipe.content }}</div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+
+    </fieldset>
+</form>
+<script src="/js/ace-builds-master/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/markdown");
+
+    window.editor = editor;
+</script>
+<script type="text/javascript">
+    // when the form is submitted, copy the contents of the editor into the form field
+    $(function () {
+        $("#the-form").submit(function() {
+            $("#content-field").val(window.editor.getValue());
+        });
+    });
+</script>
+{% endblock %}

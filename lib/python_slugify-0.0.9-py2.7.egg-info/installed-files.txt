@@ -1,0 +1,14 @@
+..\slugify\slugify.py
+..\slugify\__init__.py
+..\slugify\slugify.pyc
+..\slugify\__init__.pyc
+.\
+dependency_links.txt
+entry_points.txt
+PKG-INFO
+requires.txt
+SOURCES.txt
+top_level.txt
+..\..\..\bin\slugify-script.py
+..\..\..\bin\slugify.exe
+..\..\..\bin\slugify.exe.manifest
