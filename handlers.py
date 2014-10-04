@@ -11,7 +11,22 @@ import webapp2
 from models import *
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "templates")
-BASE = webapp2.RequestHandler
+
+class BaseRequestHandler(webapp2.RequestHandler):
+    def dispatch(self):
+        hostname = os.environ['HTTP_HOST']
+        canonical = 'kentuckycreek.com'
+        is_localhost = hostname.startswith('localhost')
+        is_canonical = (hostname == canonical)
+
+        if is_localhost or is_canonical:
+            webapp2.RequestHandler.dispatch(self)
+        else:
+            path = self.request.path
+            url = "http://%s%s" % (canonical, path)
+            self.redirect(url, True)
+
+BASE = BaseRequestHandler
 JINJA = jinja2.Environment(
     loader=jinja2.FileSystemLoader(TEMPLATE_DIR),
     extensions=['jinja2.ext.autoescape'],
