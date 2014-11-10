@@ -3,6 +3,7 @@
 {% block content %}
 {% if is_admin %}
     <p><a href="/recipes/edit/{{ recipe.slug }}">Edit</a></p>
+    <p><a href="/raw/{{ recipe.slug }}">Raw View</a></p>
 {% endif %}
 {{ recipe.rendered_content | safe }}
 {% endblock %}

@@ -111,3 +111,9 @@ class ShowRecipeHandler(BASE):
     def get(self, slug):
         recipe = Recipe.query(Recipe.slug == slug).get()
         r(self, 'show-recipe.html', { 'recipe': recipe })
+
+class ShowRawRecipeHandler(BASE):
+    def get(self, slug):
+        recipe = Recipe.query(Recipe.slug == slug).get()
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write(recipe.content)
