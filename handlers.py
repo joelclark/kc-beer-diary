@@ -47,6 +47,12 @@ class HomepageHandler(BASE):
         recipes = Recipe.query().order(-Recipe.brew_date).fetch(25)
         r(self, 'homepage.html', { 'recipes': recipes })
 
+class RobotsHandler(BASE):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write("""User-agent: *
+Disallow:""")
+
 class LoginHandler(BASE):
     def get(self):
         user = users.get_current_user()
